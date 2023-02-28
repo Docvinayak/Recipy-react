@@ -1,43 +1,123 @@
-// import React , { useState, useEffect } from "react";
+import { Card, CardHeader, CardBody, CardFooter , Image , Stack , Heading , Divider , Button ,ButtonGroup ,Text} from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
+import React from "react";
+import { useNavigate } from 'react-router-dom';
 
-// const YOUR_APP_ID = "7e78e4ec";
-// const YOUR_APP_KEY = "ba575320b9f8f6fdf6b4d3e22891212b";
 
-// function   Recipies() {
-//     const [recipes, setRecipes] = useState([]);
 
-//     useEffect(() => {
-//       fetch('https://api.edamam.com/api/recipes/v2?type=public&q=Potato&app_id=7e78e4ec&app_key=ba575320b9f8f6fdf6b4d3e22891212b')
-//         .then(response => response.json())
-//         .then(data => setRecipes(data.hits))
-//         .catch(error => console.error(error));
-//     }, []);
-//     console.log(recipes);
+function Recipe({ index, title, calories, image, ingredients ,handleAddProduct ,incart}) {
+  const navigate = useNavigate();
+  return (
+    <ChakraProvider>
+      <Card maxW="sm">
+        <CardBody>
+          <Image
+            src={image}
+            alt="Green double couch with wooden legs"
+            borderRadius="lg"
+          />
+          <Stack mt="6" spacing="3">
+            <Heading
+              size="md"
+              onClick={() => navigate(`internalpage/${title}`)}
+            >
+              {title}
+            </Heading>
+            <Text>
+              {ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient.text}</li>
+              ))}
+            </Text>
+            <Text color="blue.600" fontSize="2xl">
+              {calories}
+            </Text>
+          </Stack>
+        </CardBody>
+        <Divider />
+        <CardFooter>
+          <ButtonGroup spacing="2">
+            {/* <Button variant='solid' colorScheme='blue'>
+        Buy now
+      </Button> */}
+            {incart ? (
+              <Button
+                variant="ghost"
+                colorScheme="blue"
+                onClick={() =>
+                  handleAddProduct({ title, calories, image, ingredients })
+                }
+              >
+                Remove from Wishlist
+              </Button>
+            ) : (
+              <Button
+                variant="ghost"
+                colorScheme="blue"
+                onClick={() =>
+                  handleAddProduct({ title, calories, image, ingredients })
+                }
+              >
+                Add to Wishlist
+              </Button>
+            )}
+          </ButtonGroup>
+        </CardFooter>
+      </Card>
+    </ChakraProvider>
+  );
+}
+
+export default Recipe
+
+
+// const Recipe = ({ index, title, calories, image, ingredients ,handleAddProduct }) => {
 //   return (
-    
-//     <h1>qq</h1>
+// //     <div key={index} >
+// //       <p>{title}</p>
+// //       <p>{calories}</p>
+// //       <img src={image} alt='' />
+// //       <ol >
+// //         {ingredients.map((ingredient ,index) => (
+// //           <li key={index}>{ingredient.text}</li>
+// //         ))}
+// //       </ol>
+// //     </div>
+// //   );
+// // };
+//     <ChakraProvider>
+//      <Card maxW='sm'>
+//   <CardBody>
+//     <Image
+//       src={image}
+//       alt='Green double couch with wooden legs'
+//       borderRadius='lg'
+//     />
+//     <Stack mt='6' spacing='3'>
+//       <Heading size='md'>{title}</Heading>
+//       <Text>
+//         This sofa is perfect for modern tropical spaces, baroque inspired
+//         spaces, earthy toned spaces and for people who love a chic design with a
+//         sprinkle of vintage design.
+//       </Text>
+//       <Text color='blue.600' fontSize='2xl'>
+//         {calories}
+//       </Text>
+//     </Stack>
+//   </CardBody>
+//   <Divider />
+//   <CardFooter>
+//     <ButtonGroup spacing='2'>
+//       {/* <Button variant='solid' colorScheme='blue'>
+//         Buy now
+//       </Button> */}
+//       <Button variant='ghost' colorScheme='blue' >
+//         Add to cart
+//       </Button>
+//     </ButtonGroup>
+//   </CardFooter>
+// </Card>
+// </ChakraProvider>
 //   )
 // }
 
-// export default Recipies
-
-
-import React from "react";
-
-
-const Recipe = ({ index, title, calories, image, ingredients }) => {
-  return (
-    <div key={index} >
-      <p>{title}</p>
-      <p>{calories}</p>
-      <img src={image} alt='' />
-      <ol >
-        {ingredients.map((ingredient ,index) => (
-          <li key={index}>{ingredient.text}</li>
-        ))}
-      </ol>
-    </div>
-  );
-};
-
-export default Recipe;
+// export default Recipe;

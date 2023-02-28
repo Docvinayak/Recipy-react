@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Recipies from "./Recipies";
+import Recipies from "../component/Recipies";
 import axios from "axios";
-import Navbar from "./Navbar";
+import Navbar from "../component/Navbar";
 
-function RecipyHome() {
+function RecipyHome({handleAddProduct}) {
   const APP_ID = "d29d40f6";
   const APP_KEY = "5b19a6bd355a2ff2a764d0059f30cf7b";
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState(null);
   // const [search, setSearch] = useState("");
   const [query, setQuery] = useState("chicken");
+
 
   useEffect(() => {
     getRecipe();
@@ -19,8 +20,9 @@ function RecipyHome() {
       `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     setRecipes(response.data.hits);
-    console.log(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
+    // console.log(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
   };
+
 
   // const updateSearch = (e) => {
   //   setSearch(e.target.value);
@@ -32,18 +34,22 @@ function RecipyHome() {
   //   setSearch("");
   // };
   
+  
   const getData = (search , mealType) => {
-    console.log(search , mealType);
+    // console.log(search , mealType);
     if (search === "") {
       setQuery("chicken");
     }else{
-    setQuery(search);
+      setQuery(search);
     }
   };
 
   return (
+    
     <div>
+      {recipes ? <>
       <Navbar onSubmit={ getData } />
+      <div className="recipies_Card">
       {recipes.map((recipe, index) => (
         <Recipies
           key={index}
@@ -51,9 +57,14 @@ function RecipyHome() {
           calories={recipe.recipe.calories}
           image={recipe.recipe.image}
           ingredients={recipe.recipe.ingredients}
+          handleAddProduct={handleAddProduct}
         />
       ))}
+      </div>
+      </>
+      :<h1>loading...</h1>}
     </div>
+    
   );
 }
 

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
 nav {
   background-color: #333;
   color: #fff;
@@ -5,6 +11,7 @@ nav {
   /* justify-content: space-between; */
   padding: 10px;
 }
+
 
 nav a {
   color: #fff;
@@ -15,4 +22,52 @@ nav a {
 
 nav a:hover {
   background-color: #555;
+}
+
+.category{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+}
+.wrap,.filter,.products{
+  overflow-y: auto;
+}
+
+.wrap {
+  display: flex;
+  flex: 1;
+}
+
+.filter {
+  flex-basis: 200px;
+}
+
+.products {
+  flex: 1;
+  position: relative;	
+	width: 100%;
+	margin-bottom: 30px;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.recipies_Card{
+  position: relative;	
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 30px;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.search-input {
+  color: black;
+  margin-right: 8px;
+}
+
+form{
+  align-items: center;
+  display: flex;
+  margin: 6px;
 }
